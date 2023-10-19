@@ -13,9 +13,13 @@ const adminRouter = require("./src/routers/adminRouter");
 const userOtpRouter = require("./src/routers/userOtpRouter");
 const qualificationRouter = require("./src/routers/qualificationRouter");
 
+const corsOptions = {
+  origin: "https://dev6895.dnvl5s75yw5h4.amplifyapp.com/",
+};
+
 // extra packages
 app.use(express.json());
-app.use(cors());
+app.use(cors(corsOptions));
 
 //routes
 app.use("/api/v1/teacher", teacherRouter);
