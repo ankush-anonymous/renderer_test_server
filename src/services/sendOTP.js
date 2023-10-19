@@ -1,8 +1,8 @@
 const twilio = require("twilio");
-
+require("dotenv").config();
 const accountSid = "AC9a00bbb661b3a2b32b13257725ebd48d";
-const authToken = "a4b55d915edf515e69801e1dfcd3351e";
-const twilioPhoneNumber = +12763294161; // This is the phone number you got from Twilio
+const authToken = "973b88ed8e687ee622cbf9f92f5e7ff6";
+const twilioPhoneNumber = "+12763294161"; // This is the phone number you got from Twilio
 
 const client = twilio(accountSid, authToken);
 
