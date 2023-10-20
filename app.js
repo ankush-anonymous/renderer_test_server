@@ -14,7 +14,7 @@ const userOtpRouter = require("./src/routers/userOtpRouter");
 const qualificationRouter = require("./src/routers/qualificationRouter");
 
 const corsOptions = {
-  origin: "https://dev5350.dw1voe2hzhl2.amplifyapp.com",
+  origin: "https://www.tutorlok.in/",
 };
 
 // extra packages
