@@ -1,22 +1,30 @@
-const twilio = require("twilio");
-require("dotenv").config();
-const accountSid = "AC9a00bbb661b3a2b32b13257725ebd48d";
-const authToken = "973b88ed8e687ee622cbf9f92f5e7ff6";
-const twilioPhoneNumber = "+12763294161"; // This is the phone number you got from Twilio
+const axios = require("axios");
 
-const client = twilio(accountSid, authToken);
+const sendOTP = async (phoneNumber, otp, templateId) => {
+  const msg91AuthKey = "408355AEZofsTre65324a06P1"; // Replace with your MSG91 Auth Key
 
-const sendOTP = async (phoneNumber, otp) => {
   try {
-    const message = await client.messages.create({
-      body: `Your OTP is: ${otp}`,
-      from: "+12763294161",
-      to: phoneNumber,
-    });
+    // Define the message template with ##var## for OTP
+    // const customTemplate = `Your OTP is ##var##. Please do not share it with anyone.`;
 
-    console.log(`OTP sent to ${phoneNumber}`);
+    const options = {
+      method: "POST",
+      url: `https://control.msg91.com/api/v5/otp?template_id=${templateId}&mobile=${phoneNumber}&otp=${otp}`,
+      headers: {
+        accept: "application/json",
+        "content-type": "application/json",
+        authkey: msg91AuthKey,
+      },
+    };
+
+    // Send the OTP request to MSG91
+    const response = await axios.request(options);
+
+    // Handle success
+    console.log("OTP sent successfully", response.data);
   } catch (error) {
-    console.error(`Failed to send OTP to ${phoneNumber}:`, error);
+    // Handle error
+    console.error("Error sending OTP:", error);
     throw error;
   }
 };
