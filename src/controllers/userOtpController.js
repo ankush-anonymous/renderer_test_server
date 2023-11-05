@@ -13,16 +13,22 @@ const requestOTP = async (req, res) => {
     upperCaseAlphabets: false,
     specialChars: false,
   });
+
+  const templateId = "65479540d6fc0542e769fb22";
+
   try {
     // Store the OTP in the database
     await OTP.create({ phoneNumber, otp });
 
-    // Send OTP to the user's phone number
-    await sendOTP(phoneNumber, otp);
+    // Send OTP to the user's phone number using the template ID
+    await sendOTP(phoneNumber, otp, templateId);
 
     res.status(200).json({ message: "OTP sent successfully" });
   } catch (error) {
-    res.status(500).json({ error: "Failed to send OTP" });
+    console.error("Error sending OTP:", error);
+    res
+      .status(500)
+      .json({ error: "Failed to send OTP", details: error.message });
   }
 };
 
